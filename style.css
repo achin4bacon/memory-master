@@ -1,0 +1,23 @@
+
+body{
+    font-family: monospace; 
+    text-align: center;
+    background-image: url("./background.png")
+}
+#about{
+    border: 4px solid lightslategrey; 
+    width: 800px; 
+    height: 500px; 
+    background-color: blanchedalmond;
+    opacity: .55;
+    margin: auto; 
+    overflow: scroll;
+    margin-top: 4vh;
+}
+#navvybar{
+    margin-left: 0; 
+    text-align: right;
+}
+#homer{
+    opacity: .25
+}

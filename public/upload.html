@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Do You Remember?</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <title>Upload New Documents</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
@@ -20,24 +19,8 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
-    <!--NAVBAR-->
-    <div class="navbar navbar-default navbar-fixed-top" id="navvybar">
+        <div class="navbar navbar-default navbar-fixed-top" id="navvybar">
         <div class="container">
             <div class="navbar-header">
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
@@ -73,57 +56,61 @@
                         <li><a href="#">Browse/Search?</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Username">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-default">Sign In</button>
-                        <button id="signup" class="btn btn-default">Sign Up</button>
-                    </form>
+
                 </div>
             </center>
         </div>
     </div>
-    <br><br><br><br><br>
-
-    <!---Begin Rest-->
-    <img src="./rememberbanner.png" alt="banner" height="50%" width="50%">
-    <br>
-    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTlOGf5vSozgG5pUMsVVqQ4uR-StHbJ5vjIkq47iDwmULY6Jf6Mw" alt="homer"
-        id="homer">
-
-    <div id="container">
-        <div id="about">
-            <h1>Welcome!</h1>
-            Our goal is to provide you and your family the opportunity to begin chronicling your precious keepsakes, pictures, and stories
-            in order to preserve memories.
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-            <br> DO STUFF!
-        </div>
     </div>
+<!--UPLOAD-->
+<!--UPLOAD-->
+<!--UPLOAD-->
+<!--UPLOAD-->
+<!--UPLOAD-->
+<!--UPLOAD-->
+<!--UPLOAD-->
+<!--UPLOAD-->
+<br><br><br><br><div id="uploaddiv">
+ <form enctype="multipart/form-data" id="form">
+        <input type="text" id="imagetitle" placeholder="Image Title"><br>
+        <input type="text" id="imagewhere" placeholder="Where is it from?"><br>
+        <input type="text" id="imagewho" placeholder="Who is it from?"><br>
+        <input type="text" id="imagedesc" placeholder="Describe the Item"><br>
+                <select name="category" id="dropdown">
+            <option value="blank"> Choose a Category:</option>
+            <option value="heirloom">Heirloom</option>
+            <option value="art">Art</option>
+            <option value="jewelry">Jewelry</option>
+            <option value="misc">Misc.</option>
+</select><br>
+        <div id="privacydiv">Would you like to make this entry private? <br>Yes: <input type="checkbox" id="yprivacy"><br>No: <input type="checkbox" id="nprivacy"><br><br>
+        
+        <input type="file" id="fileupload" name="myfile"><br><br>
+        <button id="submit"></button>
+        <img src="./submitbutton.png">
+    </form>
+    </span>
+</div>
+    <img src="" id="output">
 
-    </div>
+    <script>
+        $('#submit').click(function (evt) {
+            evt.preventDefault();
+            console.log(new FormData($('#form')[0]));
+            $.ajax({
+                url: '/savefile',
+                type: 'POST',
+                data: new FormData($('#form')[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (filename) {
+                    $('#output').attr({
+                        'src': '/uploads/' + filename
+                    });
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>

@@ -13,10 +13,10 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-// connection.query('SELECT * AS solution', function (error, results, fields) {
-//   if (error) throw error;
-//   console.log('The solution is: ', results[0].solution);
-// });
+connection.query('SELECT 1+1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
 
 connection.end();
 
@@ -90,35 +90,35 @@ app.get('/uploads/:hash', function(req, res){
   //////////////////////////////////////LOG IN/////////////////////////////////////
  /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-app.post('/login', function(req, res){
-	console.log(req.body.username, " ", req.body.password, "");
-	if (!req.body.username || !req.body.password) {
-		res.send("Username or password is incorrect");
-		return;
-	}
-	if(req.body.student == "true"){
-		// Data will be user data, if its not then the wrong crudentials. if correct user, confirm login and send to correct page
-		connection.query('SELECT username, password FROM users WHERE username = ? AND password = ?', function(err, data){	
-			console.log(data, "yay");
-			if(err){
-				console.log(err);
-				return;
-			}
-			if(data !== null){
-				req.session.user = data;
-					console.log(req.session);
-				res.send(JSON.stringify({message: "success", data:data, type:"student"}));
-				return;
-			}else{
-				res.send({
-					message: "TRY AGAIN!"
-				});
-				return;
-			}
+// app.post('/login', function(req, res){
+// 	console.log(req.body.username, " ", req.body.password, "");
+// 	if (!req.body.username || !req.body.password) {
+// 		res.send("Username or password is incorrect");
+// 		return;
+// 	}
+// 	if(req.body.student == "true"){
+// 		// Data will be user data, if its not then the wrong crudentials. if correct user, confirm login and send to correct page
+// 		connection.query('SELECT username, password FROM users WHERE username = ? AND password = ?', function(err, data){	
+// 			console.log(data, "yay");
+// 			if(err){
+// 				console.log(err);
+// 				return;
+// 			}
+// 			if(data !== null){
+// 				req.session.user = data;
+// 					console.log(req.session);
+// 				res.send(JSON.stringify({message: "success", data:data, type:"student"}));
+// 				return;
+// 			}else{
+// 				res.send({
+// 					message: "TRY AGAIN!"
+// 				});
+// 				return;
+// 			}
 			
-		});
-	}
-});
+// 		});
+// 	}
+// });
 
 
    /////////////////////////////////////////////////////////////////////////////////
@@ -139,34 +139,31 @@ app.post('/login', function(req, res){
   /////////////////////////////////////GET DATA////////////////////////////////////
  /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-app.get('/api/mmemories', function(req, res){
-	connection.query('mmemories').find({
-		userId: req.session.mmemories.id ///where userid = ?
-	}).toArray(function(err, data){
-			if (err){
-				console.log(err);
-			}
+// app.get('/api/mmemories', function(req, res){
+// 	connection.query('SELECT id FROM mmemories WHERE userid = ?');
+// 			var arr = [];
+// 			for(var obj of data){
+// 				for(var i in obj.mmemories){
+// 					arr.push(obj.mmemories[i]);
+// 				}
+// 			}
+// 			console.log(arr);
+// });
 
-			var arr = [];
-			for(var obj of data){
-				for(var i in obj.mmemories){
-					arr.push(obj.mmemories[i]);
-				}
-			}
-			console.log(arr);
-			if (data){
-				// res.send(JSON.stringify(arr));
-				connection.query('mmemories').find({
-					_id: {
-						$in: arr
-					}
-				}).toArray(function(err, data){
-					res.send(JSON.stringify(data));
-					return;
-				});
-			}
-		});
-});
+
+
+		// 	if (data){
+		// 		// res.send(JSON.stringify(arr));
+		// 		connection.query('mmemories').find({
+		// 			_id: {
+		// 				$in: arr
+		// 			}
+		// 		}).toArray(function(err, data){
+		// 			res.send(JSON.stringify(data));
+		// 			return;
+		// 		});
+		// 	}
+		// });
 
    /////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////STUFF/////////////////////////////////////
@@ -213,5 +210,4 @@ app.listen(8080, function() {
 // .resize(353, 257)
 // .autoOrient()
 // .write(writeStream, function (err) {
-//   if (!err) console.log(' hooray! ');
-// });
+//////////////   if (!err) console.log(' hooray! '

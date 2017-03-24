@@ -90,35 +90,35 @@ app.get('/uploads/:hash', function(req, res){
   //////////////////////////////////////LOG IN/////////////////////////////////////
  /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-// app.post('/login', function(req, res){
-// 	console.log(req.body.username, " ", req.body.password, "");
-// 	if (!req.body.username || !req.body.password) {
-// 		res.send("Username or password is incorrect");
-// 		return;
-// 	}
-// 	if(req.body.student == "true"){
-// 		// Data will be user data, if its not then the wrong crudentials. if correct user, confirm login and send to correct page
-// 		connection.query('SELECT username, password FROM users WHERE username = ? AND password = ?', function(err, data){	
-// 			console.log(data, "yay");
-// 			if(err){
-// 				console.log(err);
-// 				return;
-// 			}
-// 			if(data !== null){
-// 				req.session.user = data;
-// 					console.log(req.session);
-// 				res.send(JSON.stringify({message: "success", data:data, type:"student"}));
-// 				return;
-// 			}else{
-// 				res.send({
-// 					message: "TRY AGAIN!"
-// 				});
-// 				return;
-// 			}
+app.post('/login', function(req, res){
+	console.log(req.body.username, " ", req.body.password, "");
+	if (!req.body.username || !req.body.password) {
+		res.send("Username or password is incorrect");
+		return;
+	}
+	if(req.body.student == "true"){
+		// Data will be user data, if its not then the wrong crudentials. if correct user, confirm login and send to correct page
+		connection.query('SELECT username, password FROM users WHERE username = ? AND password = ?', [req.body.username, req.body.password], function(err, data, fields){	
+			console.log(data, "yay");
+			if(err){
+				console.log(err);
+				return;
+			}
+			if(data !== null){
+				req.session.user = data;
+					console.log(req.session);
+				res.send(JSON.stringify({message: "success", data:data, type:"student"}));
+				return;
+			}else{
+				res.send({
+					message: "TRY AGAIN!"
+				});
+				return;
+			}
 			
-// 		});
-// 	}
-// });
+		});
+	}
+});
 
 
    /////////////////////////////////////////////////////////////////////////////////
@@ -139,16 +139,16 @@ app.get('/uploads/:hash', function(req, res){
   /////////////////////////////////////GET DATA////////////////////////////////////
  /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-// app.get('/api/mmemories', function(req, res){
-// 	connection.query('SELECT id FROM mmemories WHERE userid = ?');
-// 			var arr = [];
-// 			for(var obj of data){
-// 				for(var i in obj.mmemories){
-// 					arr.push(obj.mmemories[i]);
-// 				}
-// 			}
-// 			console.log(arr);
-// });
+app.get('/api/mmemories', function(req, res){
+	connection.query('SELECT id FROM mmemories WHERE userid = ?');
+			var arr = [];
+			for(var obj of data){
+				for(var i in obj.mmemories){
+					arr.push(obj.mmemories[i]);
+				}
+			}
+			console.log(arr);
+});
 
 
 

@@ -83,16 +83,16 @@
             <option value="jewelry">Jewelry</option>
             <option value="misc">Misc.</option>
 </select><br>
-        <div id="privacydiv">Would you like to make this entry private? <br>Yes: <input type="checkbox" id="yprivacy"><br>No: <input type="checkbox" id="nprivacy"><br><br>
-        
+        <div id="privacydiv">Would you like to make this entry private? <br>Yes: <input type="checkbox" id="yprivacy"><br>No: <input type="checkbox" id="nprivacy"><br>
+        Would you like to add an audio file? <button id="addaudio">Add audio</button> 
         <input type="file" id="fileupload" name="myfile"><br><br>
-        <button id="submit"></button>
-        <img src="./submitbutton.png">
+        <button id="submit">Submit</button>
+
     </form>
     </span>
-</div>
+</div></div>
     <img src="" id="output">
-
+<br><br><br><br><br><br><br><br><br><br><br>
     <script>
         $('#submit').click(function (evt) {
             evt.preventDefault();
@@ -112,5 +112,6 @@
             });
         });
     </script>
+    
 </body>
 </html>

@@ -62,6 +62,7 @@ var upload = multer({
 		fileSize: 10000000 // 10mb
 	}
 });
+
 // // // // // // // // // // // 
 // Middleware
 // // // // // // // // // // // 
@@ -114,8 +115,7 @@ app.post('/login', function(req, res){
 					message: "TRY AGAIN!"
 				});
 				return;
-			}
-			
+			}		
 		});
 	}
 });
@@ -147,6 +147,7 @@ app.get('/api/mmemories', function(req, res){
 					arr.push(obj.mmemories[i]);
 				}
 			}
+			//return title/user of mmemories
 			console.log(arr);
 });
 
